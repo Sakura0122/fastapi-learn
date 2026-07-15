@@ -9,6 +9,11 @@ dependencies = [
     "fastapi>=0.139.0",
     "httpx>=0.28.1",
     "pydantic>=2.13.4",
-    "pyrefly>=1.1.1",
+    "uvicorn>=0.51.0",
+]
+
+[dependency-groups]
+dev = [
     "ruff>=0.15.21",
+    "ty>=0.0.59",
 ]
