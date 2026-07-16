@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Path
+from fastapi import FastAPI, Path, Header
 from pydantic import BaseModel, Field, field_validator
 
 app = FastAPI()
@@ -28,3 +28,7 @@ async def item_detail(item_id: int = Path(gt=2, description="测试")):
 @app.post("/login")
 async def login(login_schema: LoginSchema):
     return {"username": login_schema.username, "password": login_schema.password}
+
+@app.get("/userinfo")
+async def userinfo(authorization: str = Header()):
+    return {"authorization": authorization}
