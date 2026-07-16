@@ -1,9 +1,12 @@
 from fastapi import FastAPI, Path, Header, Depends
 from pydantic import BaseModel, Field, field_validator
 
+from api.routes import user
 from dependencies.page import common
 
-app = FastAPI()
+app = FastAPI() 
+
+app.include_router(user.router)
 
 
 class LoginSchema(BaseModel):
