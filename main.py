@@ -1,5 +1,7 @@
-from fastapi import FastAPI, Path, Header
+from fastapi import FastAPI, Path, Header, Depends
 from pydantic import BaseModel, Field, field_validator
+
+from dependencies.page import common
 
 app = FastAPI()
 
@@ -25,10 +27,17 @@ async def read_root():
 async def item_detail(item_id: int = Path(gt=2, description="测试")):
     return {"item_id": item_id}
 
+
 @app.post("/login")
 async def login(login_schema: LoginSchema):
     return {"username": login_schema.username, "password": login_schema.password}
 
+
 @app.get("/userinfo")
 async def userinfo(authorization: str = Header()):
     return {"authorization": authorization}
+
+
+@app.get("/page")
+async def page(common_data: dict = Depends(common)):
+    return {"common_data": common_data}
